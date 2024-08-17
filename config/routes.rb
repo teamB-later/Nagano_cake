@@ -1,49 +1,38 @@
 Rails.application.routes.draw do
   root to: 'public/homes#top'
   get 'about' => 'public/homes#about'
+
+  scope module: :public do
+    # public/items
+    resources :items, only: [:index, :show]
+    resource :customers, path: 'customers/my_page', only: [:show]
+    resource :customers, path: 'customers/information', only: [:edit, :update]
+    get 'customers/unsubscribe', as: 'unsubscribe'
+    patch 'customers/withdraw', as: 'withdraw'
+    # public/cart_items
+    resources :cart_items, only: [:index, :update, :destroy, :create]
+    delete 'cart_items/destroy_all', as: 'destroy_all'
+    # public/orders
+    resources :orders, only: [:new, :create, :index, :show]
+    post 'orders/confirm', as: 'confirm'
+    get 'orders/thanks', as: 'thanks'
+    # public/addresses
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+  end
+
   namespace :admin do
-    get 'orders/show'
-  end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
-  end
-  namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/show'
-    get 'items/edit'
-  end
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-  end
-  namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/thanks'
-    get 'orders/index'
-    get 'orders/show'
-  end
-  namespace :public do
-    get 'cart_items/index'
-  end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/unsubscribe'
-  end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
+    # admin/homes
+    get '' => 'homes#top'
+    # admin/items
+    resources :items, except: [:destroy]
+    # admin/genres
+    resources :genres, only: [:index, :create, :edit, :update]
+    # admin/customers
+    resources :customers, only: [:index, :show, :edit, :update]
+    # admin/orders
+    resources :orders, only: [:show, :update]
+    # admin/order_details
+    resources :order_details, only: [:update]
   end
 
   # 顧客用

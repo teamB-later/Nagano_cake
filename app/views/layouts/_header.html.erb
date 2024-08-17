@@ -1,0 +1,30 @@
+<herder>
+      <span>LOGO</span>
+        <%= if customer_siguned_in? %>
+         <li>
+           <%= link_to "マイページ", customers %>
+         </li>
+         <li>
+           <%= link_to "商品一覧", items %>
+         </li>
+         <li>
+           <%= link_to "カート", cart_items %>
+         </li>
+         <li>
+           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+         </li>
+       <% else %>
+         <li>
+           <%= link_to "アバウト", about_path %>
+         </li>
+         <li>
+           <%= link_to "商品一覧" items %>
+         </li>
+         <li>
+           <%= link_to "新規登録" new_customer_registration_path %>
+         </li>
+         <li>
+           <%= link_to "ログイン" new_customer_session_path %>
+         </li>
+         <% end %>
+</herder>

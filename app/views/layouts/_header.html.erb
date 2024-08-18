@@ -1,30 +1,30 @@
 <herder>
-      <span>LOGO</span>
-        <%= if customer_siguned_in? %>
+      <a class="navbar-brand" href="/"><span>LOGO</span></a>
+        <% if customer_signed_in? %>
          <li>
-           <%= link_to "マイページ", customers %>
+           <%= link_to "マイページ", customers_path,class: "btn btn-light", type: "button" %>
          </li>
          <li>
-           <%= link_to "商品一覧", items %>
+           <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
          </li>
          <li>
-           <%= link_to "カート", cart_items %>
+           <%= link_to "カート", cart_items_path,class: "btn btn-light", type: "button" %>
          </li>
          <li>
-           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: "btn btn-light", type: "button" %>
          </li>
        <% else %>
          <li>
-           <%= link_to "アバウト", about_path %>
+           <%= link_to "アバウト", about_path,class: "btn btn-light", type: "button" %>
          </li>
          <li>
-           <%= link_to "商品一覧" items %>
+           <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
          </li>
          <li>
-           <%= link_to "新規登録" new_customer_registration_path %>
+           <%= link_to "新規登録", new_customer_registration_path,class: "btn btn-light", type: "button" %>
          </li>
          <li>
-           <%= link_to "ログイン" new_customer_session_path %>
+           <%= link_to "ログイン", new_customer_session_path,class: "btn btn-light", type: "button" %>
          </li>
          <% end %>
 </herder>

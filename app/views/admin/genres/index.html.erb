@@ -2,16 +2,23 @@
 
 ジャンル名　「ジャンル名登録」　新規登録ボタン<br><br>
 
-<table class='table'>
-  <thead>
-    <th>ジャンル</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% @genres.each do |genre|%>
-      <td><%= genre.name %></td>
-      <td>編集する</td>
-    <% end %>
-  </tbody>
-</table>
 
+<div class="container">
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ジャンル</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @genres.each do |genre| %>
+        <tr>
+          <td><%= genre.name %></td>
+          <td></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

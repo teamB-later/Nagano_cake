@@ -34,13 +34,12 @@
           </tr>
           <tr>
             <th>会員ステータス</th>
-            <td><%= @customer. is_active %></td>
+            <td><%= @customer. customer_status %></td>
           </tr>
           <tr>
             <td></td>
             <td>
               <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: 'btn btn-primary' %>
-              <!--注文履歴一覧のパスどこ？-->
               <%= link_to "注文一覧を見る", admin_path, class: 'btn btn-primary' %>
             </td>
           </tr>

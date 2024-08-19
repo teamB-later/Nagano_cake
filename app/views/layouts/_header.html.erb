@@ -1,30 +1,37 @@
 <herder>
-      <a class="navbar-brand" href="/"><span>LOGO</span></a>
-        <% if customer_signed_in? %>
-         <li>
-           <%= link_to "マイページ", customers_path,class: "btn btn-light", type: "button" %>
-         </li>
-         <li>
-           <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
-         </li>
-         <li>
-           <%= link_to "カート", cart_items_path,class: "btn btn-light", type: "button" %>
-         </li>
-         <li>
-           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: "btn btn-light", type: "button" %>
-         </li>
-       <% else %>
-         <li>
-           <%= link_to "アバウト", about_path,class: "btn btn-light", type: "button" %>
-         </li>
-         <li>
-           <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
-         </li>
-         <li>
-           <%= link_to "新規登録", new_customer_registration_path,class: "btn btn-light", type: "button" %>
-         </li>
-         <li>
-           <%= link_to "ログイン", new_customer_session_path,class: "btn btn-light", type: "button" %>
-         </li>
-         <% end %>
+  <nav class="navbar navbar-expanded-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/"><span>Nagano Cake</span></a>
+        <ul class="navbar-nav ml-auto d-flex flex-row">
+          <% if customer_signed_in? %>
+          <li>
+            <%= link_to "マイページ", customers_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "カート", cart_items_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete,class: "btn btn-light", type: "button" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "アバウト", about_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "新規登録", new_customer_registration_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_customer_session_path,class: "btn btn-light", type: "button" %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+
+  </nav>
 </herder>

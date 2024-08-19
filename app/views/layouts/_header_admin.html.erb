@@ -1,6 +1,13 @@
 <header>
-      <span>LOGO</span>
-        <% if admin_signed_in? %>
+  <nav class="navbar navbar-expanded-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/"><span>Nagano Cake</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navber-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if admin_signed_in? %>
           <li>
             <%= link_to "商品一覧",  admin_items_path,class: "btn btn-light", type: "button" %>
           </li>
@@ -14,6 +21,24 @@
             <%= link_to "ジャンル一覧", admin_genres_path,class: "btn btn-light", type: "button" %>
           </li>
           <li>
-            <%= link_to "ログアウト", destroy_admin_session_path
+            <%= link_to "ログアウト", destroy_admin_session_path,class: "btn btn-light", type: "button" %>
           </li>
+        <% else %>
+          <li>
+            <%= link_to "アバウト", about_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "新規登録", new_customer_registration_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_customer_session_path,class: "btn btn-light", type: "button" %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>

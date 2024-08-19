@@ -1,8 +1,11 @@
 class Public::AddressesController < ApplicationController
   def index
+  #  = .new
+   # = .all
   end
 
   def edit
+  #  @ = .find(params[:id])
   end
 
   def create

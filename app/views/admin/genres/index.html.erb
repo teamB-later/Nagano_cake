@@ -1,0 +1,17 @@
+ジャンル一覧・追加<br><br>
+
+ジャンル名　「ジャンル名登録」　新規登録ボタン<br><br>
+
+<table class='table'>
+  <thead>
+    <th>ジャンル</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @genres.each do |genre|%>
+      <td><%= genre.name %></td>
+      <td>編集する</td>
+    <% end %>
+  </tbody>
+</table>
+

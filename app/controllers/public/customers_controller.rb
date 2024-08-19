@@ -11,7 +11,12 @@ class Public::CustomersController < ApplicationController
   end
 
   def update
-
+    @customer_id = current_customer.id
+    @customer = Customer.find(@customer_id)
+    if @customer.update(customer_params)
+      redirect_to customers_path
+      
+    end
   end
 
   def unsubscribe

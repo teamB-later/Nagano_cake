@@ -1,6 +1,6 @@
 <div class="container">
-  
-  
+
+
   <%= form_with(model: @customer, url: { action: 'update' }) do |f| %>
     <div class="row">
       <div class="col-lg-4">
@@ -12,39 +12,39 @@
             <td><%= f.text_field :first_name, value: @customer.first_name %></td>
             <td><%= f.text_field :last_name, value: @customer.last_name %></td>
           </tr>
-        
+
           <tr>
             <td><p>フリガナ</p></td>
             <td><%= f.text_field :first_name_kana, value: @customer.first_name_kana %></td>
             <td><%= f.text_field :last_name_kana, value: @customer.last_name_kana %></td>
           </tr>
-          
+
           <tr>
             <td><p>郵便番号</p></td>
             <td><%= f.text_field :post_code, value: @customer.post_code %></td>
           </tr>
-          
+
           <tr>
             <td><p>住所</p></td>
             <td><%= f.text_field :address, value: @customer.address %></td>
           </tr>
-          
+
           <tr>
             <td><p>電話番号</p></td>
             <td><%= f.text_field :telephone_number, value: @customer.telephone_number %></td>
           </tr>
-          
+
           <tr>
             <td><p>メールアドレス</p></td>
             <td><%= f.text_field :email, value: @customer.email %></td>
           </tr>
-          
+
           <tr>
             <td></td>
             <!--会員情報編集後はマイページに遷移-->
             <td><%= f.submit '編集内容を保存' %></td>
             <!--退会確認ページに遷移-->
-            <td><p>退会する</p></td>
+            <td><%= link_to "退会する", unsubscribe_path %></td>
           </tr>
         </table>
     </div>

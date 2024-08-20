@@ -3,33 +3,37 @@
     <h5>商品詳細</h5>
   </div>
   <div class="row">
-    <table class="table table-borderless">
-      <tbody>
-        <tr>
-          <td>商品名</td>
-          <td><%= @item.name %></td>
-        </tr>
-        <tr>
-          <td>商品説明</td>
-          <td><%= @item.introduction %></td>
-        </tr>
-        <tr>
-          <td>ジャンル</td>
-          <td><%= @item.genre.name %></td>
-        </tr>
-        <tr>
-          <td>税込価格<br>(税抜価格)</td>
-          <td><%= (@item.price * 1.1).floor %>(<%= @item.price %>)</td>
-        </tr>
-        <tr>
-          <td>販売ステータス</td>
-          <td><%= @item.is_active %></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="col">
+      <%= image_tag @item.get_item_image(100, 100) %>
+    </div>
+    <div class="col">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td>商品名</td>
+            <td><%= @item.name %></td>
+          </tr>
+          <tr>
+            <td>商品説明</td>
+            <td><%= @item.introduction %></td>
+          </tr>
+          <tr>
+            <td>ジャンル</td>
+            <td><%= @item.genre.name %></td>
+          </tr>
+          <tr>
+            <td>税込価格<br>(税抜価格)</td>
+            <td><%= @item.item_status %>(<%= @item.price %>)</td>
+          </tr>
+          <tr>
+            <td>販売ステータス</td>
+            <td><%= @item.is_active %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="row">
     <%= link_to "編集する" ,edit_admin_item_path, class: "btn btn-success" %>
   </div>
 </div>
-<%= image_tag @item.get_image %>

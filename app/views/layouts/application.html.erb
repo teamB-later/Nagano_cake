@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <% if admin_signed_in? %>
+    <!--// adminログイン状態の際に、表示したいheaderのメニューを記載-->
+    <%= render "layouts/header_admin" %>
+    <% elsif customer_signed_in? %>
+    <%= render "layouts/header_customer" %>
+     <% else %>
+    <%= render "layouts/header" %>
+     <% end %>
+
     <%= yield %>
+    <%= render "layouts/footer" %>
   </body>
 </html>

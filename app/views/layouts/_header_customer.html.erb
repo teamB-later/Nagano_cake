@@ -2,8 +2,8 @@
   <nav class="navbar navbar-expanded-lg navbar-light bg-light">
     <div class="container">
       <a class="navbar-brand" href="/"><span>Nagano Cake</span></a>
+      <p>ようこそ、<%= current_customer.last_name %>さん!</p>
         <ul class="navbar-nav ml-auto d-flex flex-row">
-
           <li>
             <%= link_to "マイページ", customers_path,class: "btn btn-light", type: "button" %>
           </li>

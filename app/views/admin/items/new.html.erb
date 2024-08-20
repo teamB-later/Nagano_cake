@@ -6,7 +6,7 @@
     <div class="col-5">
       <table class="table table-borderless">
         <tbody>
-          <%= form_with model: @item do |f| %>
+          <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
             <tr>
               <td><%= f.label :商品画像 %></td>
               <td><%= f.file_field :image, accept: "image/*" %></td>

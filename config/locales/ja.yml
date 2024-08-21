@@ -4,14 +4,14 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
-      status:
+      statuses:
         waiting: "入金待ち"
         confirmation: "入金確認"
         making: "製作中"
         preparation: "発送準備中"
         transported: "発送済み"
     order_detail:
-      making_status:
+      making_statuses:
         impossible: "製作不可"
         wating: "製作待ち"
         making: "製作中"
@@ -33,7 +33,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -59,7 +59,7 @@ ja:
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月

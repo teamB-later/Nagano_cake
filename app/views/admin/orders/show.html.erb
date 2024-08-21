@@ -15,10 +15,12 @@
       <p><%= @order.address %></p>
       <p><%= @order.name %></p>
       <p><%= @order.payment_method_i18n %></p>
-      <%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
-        <%= f.select :status, Order.statuses.keys.map { |status| [I18n.t("enums.order.statuses.#{status}"), status] } %>
-      <% end %>
+      <div class="col d-flex">
+        <%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
+          <%= f.select :status, Order.statuses.keys.map { |status| [I18n.t("enums.order.statuses.#{status}"), status] } %>
+          <%= f.submit "更新", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
-

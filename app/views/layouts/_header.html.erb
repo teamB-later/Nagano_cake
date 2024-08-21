@@ -1,0 +1,21 @@
+<header>
+  <nav class="navbar navbar-expanded-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/"><span>Nagano Cake</span></a>
+        <ul class="navbar-nav ml-auto d-flex flex-row">
+          <li>
+            <%= link_to "アバウト", about_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "新規登録", new_customer_registration_path,class: "btn btn-light", type: "button" %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_customer_session_path,class: "btn btn-light", type: "button" %>
+          </li>
+        </ul>
+    </div>
+  </nav>
+</header>

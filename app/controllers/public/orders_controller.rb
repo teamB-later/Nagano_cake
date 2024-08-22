@@ -20,6 +20,9 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.save
+    redirect_to thanks_path
   end
 
   def index
@@ -54,7 +57,7 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:post_code, :address, :name, :payment_method)
+    params.require(:order).permit(:post_code, :address, :name, :shipping_cost, :total_payment, :payment_method)
   end
 
   def select_address_params

@@ -51,4 +51,17 @@
       <p>支払方法　<%= @order.payment_method_i18n %></p>
     </div>
   </div>
+  <div class="row">
+    <div class="col">
+      <p>お届け先　〒<%= @order.post_code %> <%= @order.address %></p>
+      <p>　　　　　<%= @order.name %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+        <%= f.submit "注文を確定する" %>
+      <% end %>
+    </div>
+  </div>
 </div>

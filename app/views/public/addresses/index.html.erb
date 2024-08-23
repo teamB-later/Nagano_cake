@@ -1,2 +1,44 @@
-<h1>Public::Addresses#index</h1>
-<p>Find me in app/views/public/addresses/index.html.erb</p>
+<h1>配送先登録/一覧</h1>
+
+<!-- 新規住所追加フォーム -->
+<h2>新しい住所を追加</h2>
+<%= form_with model: @address, url: addresses_path, method: :post do |form| %>
+  <div>
+    <%= form.label :postal_code, '郵便番号' %>
+    <%= form.text_field :post_code %>
+  </div>
+  <div>
+    <%= form.label :address, '住所' %>
+    <%= form.text_field :address %>
+  </div>
+  <div>
+    <%= form.label :name, '宛名' %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.submit '新規登録', class:"btn btn-success" %>
+  </div>
+<% end %>
+
+ <div class="col-5 ml-3">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>郵便番号</th>
+                    <th>住所</th>
+                    <th>宛名</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @addresses.each do |address| %>
+                <tr>
+                    <td><%= address.post_code %></td>
+                    <td><%= address.address %></td>
+                    <td><%= address.name %></td>
+                    <td><%= link_to "編集する", edit_address_path(address.id), class: "btn btn-success", type: "button" %>
+                        <%= link_to "削除する",address, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
+    </div>

@@ -32,7 +32,13 @@
               <% end %>
             </td>
             <td><%= customer.email %></td>
-            <td><%= customer.customer_status %></td>
+            <td>
+              <% if customer.customer_status == "有効" %>
+                <span style="color: green"><%= customer.customer_status %></span>
+              <% else %>
+                <span style="color: silver"><%= customer.customer_status %></span>
+              <% end %>
+            </td>
           </tr>
         </tbody>
         <% end %>

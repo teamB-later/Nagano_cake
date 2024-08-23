@@ -67,7 +67,11 @@
       <p>会員ステータス</p>
     </div>
     <div class="col">
-      <%= @customer. customer_status %>
+      <% if @customer.customer_status == "有効" %>
+        <span style="color: green"><%= @customer.customer_status %></span>
+      <% else %>
+        <span style="color: silver"><%= @customer.customer_status %></span>
+      <% end %>
     </div>
   </div>
   <div class="row">

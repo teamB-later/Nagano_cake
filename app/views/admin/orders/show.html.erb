@@ -43,13 +43,13 @@
             </td>
             <td>
               <!--税込み価格-->
-              <p><%= (order_detail.item.price.to_i * 1.1).floor %></p>
+              <p><%= (order_detail.price.to_i).floor.to_s(:delimited) %></p>
             </td>
             <td>
               <p><%= order_detail.amount %></p>
             </td>
             <td>
-              <%= (order_detail.item.price.to_i * order_detail.amount.to_i * 1.1).floor %>
+              <%= (order_detail.price.to_i * order_detail.amount.to_i).floor.to_s(:delimited) %>
             </td>
             <td>
               <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true do |f| %>
@@ -79,7 +79,7 @@
         </tr>
         <tr>
           <td><h6><strong>請求金額合計</strong></h6></td>
-          <td><%= @order.total_payment %></td>
+          <td><%= @order.total_payment.to_s(:delimited) %></td>
         </tr>
       </table>
     </div>

@@ -71,9 +71,12 @@
     </div>
   </div>
   <div class="row">
-    <div class="col d-flex justify-content-center">
-      <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: 'btn btn-success m-4'%>
-      <%= link_to "注文一覧を見る", admin_path, class: 'btn btn-primary m-4' %>
+    <div class="col-3 ml-5"></div>
+    <div class="col-2">
+      <%= link_to "編集する", edit_admin_customer_path(@customer.id), class: 'btn btn-success'%>
+    </div>
+    <div class="col">
+      <%= link_to "注文一覧を見る", admin_path, class: 'btn btn-primary' %>
     </div>
   </div>
 </div>

@@ -23,10 +23,14 @@
           <% @items.each do |item| %>
             <tr>
               <td><%= item.id %></td>
-              <td><%= link_to "#{item.name}", admin_item_path(item.id) %></td>
+              <td><%= link_to "#{item.name}", admin_item_path(item.id), style: "color: black; text-decoration:underline; text-decoration-color:black;" %></td>
               <td><%= item.price.to_s(:delimited) %></td>
               <td><%= Genre.find(item.genre_id).name %></td>
-              <td><%= item.is_active %></td>
+              <% if item.is_active == true %>
+                <td style="color: limegreen"><strong><%= item.item_status %></strong></td>
+              <% else %>
+                <td style="color: silver"><strong><%= item.item_status %></strong></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

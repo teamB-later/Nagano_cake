@@ -1,6 +1,7 @@
 class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
+    @addresses = current_customer.addresses
   end
 
   def confirm
@@ -26,9 +27,11 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = current_customer.orders
   end
 
   def show
+    @order = Order.find(params[:id])
   end
 
   # メソッドの記述

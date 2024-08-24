@@ -1,6 +1,4 @@
 <h3>注文履歴詳細</h3>
-<% status = OrderDetail.making_statuses.key(3) %>
-<%= status %>
 <div class="container py-5">
   <div class="row d-flex" >
     <div class="col">
@@ -21,7 +19,6 @@
           <%= f.select :status, Order.statuses.keys.map { |status| [I18n.t("enums.order.statuses.#{status}"), status] } %>
           <%= f.submit "更新", class: "btn btn-success" %>
         <% end %>
-        
       </div>
     </div>
   </div>
@@ -38,7 +35,7 @@
           <th></th>
         </tr>
         <% @sum = 0 %>
-        <% order_details.each do |order_detail| %>
+        <% @order_details.each do |order_detail| %>
           <tr>
             <td>
               <p><%= order_detail.item.name %></p>

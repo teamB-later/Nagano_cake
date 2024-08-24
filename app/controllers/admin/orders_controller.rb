@@ -2,16 +2,20 @@ class Admin::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @status = Order.statuses
-    # @order_detail = OrderDetail.find(params[:id])
     @order_details = @order.order_details
 
   end
 
   def update
     @order = Order.find(params[:id])
+    @order_details = @order.order_details
+  # 　order_detail = id
+    # order_detail = @order.order_id
 
-    if @order.status == "confirmation"
-      @order_details.update(status: "waiting")
+    if order_confirmation == true
+      @order_details.each do |order_detail|
+        order_detail.update(making_status: "waiting")
+      end
     end
 
     if @order.update(order_params)
@@ -23,8 +27,17 @@ class Admin::OrdersController < ApplicationController
   end
 
   private
+
   def order_params
     params.require(:order).permit(:status)
+  end
+
+  def order_confirmation
+      if @order.status != 'confirmation'
+        return false
+      else
+        return true
+      end
   end
 
 end

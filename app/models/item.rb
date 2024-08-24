@@ -28,4 +28,5 @@ class Item < ApplicationRecord
       "販売停止中"
     end
   end
+  
 end

@@ -9,8 +9,6 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order_details = @order.order_details
-  # 　order_detail = id
-    # order_detail = @order.order_id
 
     if order_confirmation == true
       @order_details.each do |order_detail|

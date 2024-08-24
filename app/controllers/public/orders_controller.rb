@@ -23,7 +23,33 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.save
+
+
+    o_d_tes_meth
     redirect_to thanks_path
+  end
+
+  def o_d_tes_meth
+    cart_items_params = params[:cart_items]
+    puts "cart_items_params: #{cart_items_params.inspect}"
+    cart_items_params.each do |key, value|
+      @order_detail.order_id = @order.id
+      @order_detail = @order.order_details.new
+      @order_detail.item_id = value["o_d_item_id"]
+      @order_detail = value["o_d_price"]
+      @order_detail = value["o_d_amount"]
+    end
+  end
+
+  def o_d_test
+    order_detail_params_test.each do |o_d_params|
+      @order_detail = @order.order_details.new
+      @order_detail.order_id = @order.id
+      @order_detail.item_id = o_d_params[:o_d_item_id]
+      @order_detail.price = o_d_params[:o_d_price]
+      @order_detail.amount = o_d_params[:o_d_amount]
+      @order_detail.save
+    end
   end
 
   def index
@@ -69,6 +95,14 @@ class Public::OrdersController < ApplicationController
 
   def address_params
     params[:order][:address_id]
+  end
+
+  def order_detail_params_test
+    params.require(:order).permit(:cart_items, o_d_items: [:o_d_item_id, :o_d_price, :o_d_amount])
+  end
+
+  def order_detail_params
+    params.require(:order_detail).permit(:order_id, :item_id, :price, :amount)
   end
 
 end

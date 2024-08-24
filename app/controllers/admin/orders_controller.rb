@@ -2,27 +2,25 @@ class Admin::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @status = Order.statuses
-    @order_detail = OrderDetail.find(params[:id])
-    @order_details = OrderDetail.all
+    # @order_detail = OrderDetail.find(params[:id])
+    @order_details = @order.order_details
+
   end
 
   def update
-     @order = Order.find(params[:id])
+    @order = Order.find(params[:id])
 
-    # if OrderDetail.making_statuses.key("製作中")
-    #   @order.statuses.key = "製作中"
-    # end
-    
-    
+    if @order.status == "confirmation"
+      @order_details.update(status: "waiting")
+    end
 
     if @order.update(order_params)
       redirect_to admin_order_path(@order)
     else
       render :show
     end
+
   end
-
-
 
   private
   def order_params

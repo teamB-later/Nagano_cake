@@ -3,6 +3,7 @@ class Admin::OrderDetailsController < ApplicationController
     @order_detail = OrderDetail.find(params[:id])
     @order_id = @order_detail.order_id
     @order = Order.find(@order_id)
+    @order_details = @order.order_details
 
     if @order_detail.making_status == "making"
       @order.update(status:"making")
@@ -13,15 +14,6 @@ class Admin::OrderDetailsController < ApplicationController
     else
       render :show
     end
-
-
-
-
-    # case OrderDetail.making_statuses.key("製作中")
-    #   when 2
-    #     @order.statuses.key = 2
-    # end
-
   end
 
   private

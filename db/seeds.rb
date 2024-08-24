@@ -11,5 +11,5 @@ Customer.create([{last_name: '1', first_name: '1', last_name_kana: '1', first_na
 Address.create([{customer_id: '1', name: '1a', post_code: '1234567', address: '11'}, {customer_id: '1', name: '1b', post_code: '1234567', address: '12'}])
 Item.create([{genre_id: '1', name: 'チョコケーキ', introduction: 'おいしいチョコケーキです。', price: '100'}, {genre_id: '1', name: 'チーズケーキ', introduction: 'おいしいチーズケーキです。', price: '200'}])
 CartItem.create([{item_id: '1', customer_id: '1', amount: '1'}, {item_id: '2', customer_id: '1', amount: '2'}])
-Order.create([{customer_id: '1', post_code: '1234567', address: '11', name: '1a', shipping_cost: '800', total_payment: '1000', payment_method: '0'}, {customer_id: '1', post_code: '1234567', address: '12', name: '1b', shipping_cost: '800', total_payment: '2000', payment_method: '1'}])
+Order.create([{customer_id: '1', post_code: '1234567', address: '11', name: '1a', shipping_cost: '800', total_payment: '1000', payment_method: 'credit_card'}, {customer_id: '1', post_code: '1234567', address: '12', name: '1b', shipping_cost: '800', total_payment: '2000', payment_method: 'transfer'}])
 OrderDetail.create([{order_id: '1', item_id: '1', price: '110', amount: '1'}, {order_id: '1', item_id: '2', price: '220', amount: '2'}])

@@ -38,7 +38,7 @@
           <th></th>
         </tr>
         <% @sum = 0 %>
-        <% @order_details.each do |order_detail| %>
+        <% order_details.each do |order_detail| %>
           <tr>
             <td>
               <p><%= order_detail.item.name %></p>

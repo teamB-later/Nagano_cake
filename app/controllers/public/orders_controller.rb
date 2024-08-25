@@ -23,34 +23,11 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.save
-
-
     o_d_tes_meth
+    # cart_itemsの
     redirect_to thanks_path
   end
 
-  def o_d_tes_meth
-    cart_items_params = params[:cart_items]
-    puts "cart_items_params: #{cart_items_params.inspect}"
-    cart_items_params.each do |key, value|
-      @order_detail.order_id = @order.id
-      @order_detail = @order.order_details.new
-      @order_detail.item_id = value["o_d_item_id"]
-      @order_detail = value["o_d_price"]
-      @order_detail = value["o_d_amount"]
-    end
-  end
-
-  def o_d_test
-    order_detail_params_test.each do |o_d_params|
-      @order_detail = @order.order_details.new
-      @order_detail.order_id = @order.id
-      @order_detail.item_id = o_d_params[:o_d_item_id]
-      @order_detail.price = o_d_params[:o_d_price]
-      @order_detail.amount = o_d_params[:o_d_amount]
-      @order_detail.save
-    end
-  end
 
   def index
     @orders = current_customer.orders
@@ -61,6 +38,24 @@ class Public::OrdersController < ApplicationController
   end
 
   # メソッドの記述
+  def o_d_tes_meth
+    cart_items_params = order_detail_params_test
+    cart_items_params.each do |a, b|
+      @order_detail = OrderDetail.new
+      @order_detail.order_id = @order.id
+      b.each do |c, d|
+        if c == "o_d_item_id"
+          @order_detail.item_id = d
+        elsif c == "o_d_price"
+          @order_detail.price = d
+        else #o_d_amount
+          @order_detail.amount = d
+        end
+      end
+      @order_detail.save
+    end
+  end
+
   def input_address_method #ラジオボタンで選んだ住所関連の入力
     select_address = select_address_params.to_i
     if select_address == 0 #current_customerの住所
@@ -98,7 +93,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def order_detail_params_test
-    params.require(:order).permit(:cart_items, o_d_items: [:o_d_item_id, :o_d_price, :o_d_amount])
+    params[:order][:cart_items]
   end
 
   def order_detail_params

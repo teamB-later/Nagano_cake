@@ -1,6 +1,4 @@
 <h3>注文履歴詳細</h3>
-<% status = OrderDetail.making_statuses.key(3) %>
-<%= status %>
 <div class="container py-5">
   <div class="row d-flex" >
     <div class="col">
@@ -17,11 +15,11 @@
       <p><%= @order.name %></p>
       <p><%= @order.payment_method_i18n %></p>
       <div class="col d-flex">
+        <!--セレクトボックスの表示と日本語化-->
         <%= form_with model: @order, url: admin_order_path, method: :patch, local: true do |f| %>
           <%= f.select :status, Order.statuses.keys.map { |status| [I18n.t("enums.order.statuses.#{status}"), status] } %>
           <%= f.submit "更新", class: "btn btn-success" %>
         <% end %>
-        
       </div>
     </div>
   </div>
@@ -38,7 +36,7 @@
           <th></th>
         </tr>
         <% @sum = 0 %>
-        <% order_details.each do |order_detail| %>
+        <% @order_details.each do |order_detail| %>
           <tr>
             <td>
               <p><%= order_detail.item.name %></p>
@@ -51,9 +49,11 @@
               <p><%= order_detail.amount %></p>
             </td>
             <td>
+              <!--小計-->
               <%= (order_detail.price.to_i * order_detail.amount.to_i).floor.to_s(:delimited) %>
             </td>
             <td>
+              <!--セレクトボックスの表示と日本語化-->
               <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch, local: true do |f| %>
                 <%= f.select :making_status, OrderDetail.making_statuses.keys.map { |making_status| [I18n.t("enums.order_detail.making_statuses.#{making_status}"), making_status] } %>
                 <%= f.submit "更新", class: "btn btn-success" %>

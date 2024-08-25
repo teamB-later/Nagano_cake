@@ -1,2 +1,80 @@
-<h1>Public::Orders#confirm</h1>
-<p>Find me in app/views/public/orders/confirm.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p>注文情報確認</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td><%= cart_item.item.name %></td>
+              <td><%= cart_item.item.with_tax_price %></td>
+              <td><%= cart_item.amount %></td>
+              <td><%= cart_item.subtotal %></td>
+            </tr>
+            <!-- カートアイテムをorder_detailへ -->
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>送料</td>
+            <td><%= @order.shipping_cost %></td>
+          </tr>
+          <tr>
+            <td>商品合計</td>
+            <td><%= @items_total_payment %></td>
+          </tr>
+          <tr>
+            <td>請求金額</td>
+            <td><%= @order.total_payment %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>支払方法　<%= @order.payment_method_i18n %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p>お届け先　〒<%= @order.post_code %> <%= @order.address %></p>
+      <p>　　　　　<%= @order.name %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= form_with model: @order, url: orders_path, method: :post do |f| %>
+        <%= f.hidden_field :post_code, :value => @order.post_code %>
+        <%= f.hidden_field :address, :value => @order.address %>
+        <%= f.hidden_field :name, :value => @order.name %>
+        <%= f.hidden_field :shipping_cost, :value => @order.shipping_cost %>
+        <%= f.hidden_field :total_payment, :value => @order.total_payment %>
+        <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+        <%= f.submit "注文を確定する" %>
+        <!-- order_detailのやつ -->
+        <% @cart_items.each do |cart_item| %>
+          <%= f.hidden_field "cart_items[#{cart_item.id}][o_d_item_id]", :value => cart_item.item.id %>
+          <%= f.hidden_field "cart_items[#{cart_item.id}][o_d_price]", :value => cart_item.item.with_tax_price %>
+          <%= f.hidden_field  "cart_items[#{cart_item.id}][o_d_amount]", :value => cart_item.amount %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

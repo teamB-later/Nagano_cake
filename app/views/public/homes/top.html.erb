@@ -29,9 +29,11 @@
     <div class="col-1"></div>
     <% @new_item.each do|new_item| %>
     <div class="col-2 mx-4">
-      <p><%= image_tag new_item.get_item_image(150,150) %></p>
-      <p><%= new_item.name %></p>
-      <p>￥<%= new_item.price.to_s(:delimited) %></p>
+      <%= link_to item_path(new_item.id), style: "color:black" do %>
+        <%= image_tag new_item.get_item_image(150,150) %>
+        <p><%= new_item.name %></p>
+        <p>￥<%= new_item.price.to_s(:delimited) %></p>
+      <% end %>
     </div>
     <% end %>
   </div>

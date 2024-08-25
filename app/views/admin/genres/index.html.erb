@@ -1,19 +1,17 @@
 <div class="container">
-  <div class="row">
+  <div class="row py-4">
     <div class="col-3">
-      <p>ジャンル一覧・追加</p>
+      <h4 style="text-align:center; background-color: whitesmoke">ジャンル一覧・追加</4>
     </div>
   </div>
-  <div class="row">
-    <div class="col">
-      <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
-        <%= f.label :ジャンル名 %>
-        <%= f.text_field :name, placeholder: "ジャンル名" %>
-        <%= f.submit "新規登録", class: "btn btn-success" %>
-      <% end %>
+  <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
+    <div class="row py-3">
+      <div class="col-2"><%= f.label :ジャンル名 %></div>
+      <div class="col-3"><%= f.text_field :name, placeholder: "ジャンル名" %></div>
+      <div class="col-1"><%= f.submit "新規登録", class: "btn btn-success" %></div>
     </div>
-  </div>
-  <div class="row">
+  <% end %>
+  <div class="row py-4">
     <div class="col-4">
       <table class="table">
         <thead>
@@ -26,7 +24,7 @@
           <% @genres.each do |genre| %>
             <tr>
               <td><%= genre.name %></td>
-              <td><%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-success" %></td>
+              <td style="text-align:center"><%= link_to "編集する", edit_admin_genre_path(genre), class: "btn btn-success" %></td>
             </tr>
           <% end %>
         </tbody>

@@ -26,7 +26,7 @@
           <tr>
             <td><%= customer.id %></td>
             <td>
-              <%= link_to admin_customer_path(customer.id) do %>
+              <%= link_to admin_customer_path(customer.id), style: "color: black; text-decoration:underline; text-decoration-color:black;" do %>
                 <%= customer.last_name %>
                 <%= customer.first_name %>
               <% end %>

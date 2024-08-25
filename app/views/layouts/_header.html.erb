@@ -1,21 +1,46 @@
 <header>
-  <nav class="navbar navbar-expanded-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="/"><span>Nagano Cake</span></a>
-        <ul class="navbar-nav ml-auto d-flex flex-row">
-          <li>
-            <%= link_to "アバウト", about_path,class: "btn btn-light", type: "button" %>
-          </li>
-          <li>
-            <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
-          </li>
-          <li>
-            <%= link_to "新規登録", new_customer_registration_path,class: "btn btn-light", type: "button" %>
-          </li>
-          <li>
-            <%= link_to "ログイン", new_customer_session_path,class: "btn btn-light", type: "button" %>
-          </li>
-        </ul>
+      <div class="row w-100">
+        <!-- ロゴを左に配置 -->
+        <div class="col-3 d-flex align-items-center">
+          <a class="navbar-brand" href="/">
+            <span>Nagano Cake</span>
+          </a>
+        </div>
+        <!-- 右側のメニューを一番右に配置 -->
+        <div class="col-9">
+          <div class="d-flex justify-content-end">
+            <ul class="navbar-nav ml-auto d-flex flex-row">
+              <li>
+                <%= link_to "アバウト", about_path,class: "btn btn-light", type: "button" %>
+              </li>
+              <li>
+                <%= link_to "商品一覧", items_path,class: "btn btn-light", type: "button" %>
+              </li>
+              <li>
+                <%= link_to "新規登録", new_customer_registration_path,class: "btn btn-light", type: "button" %>
+              </li>
+              <li>
+                <%= link_to "ログイン", new_customer_session_path,class: "btn btn-light", type: "button" %>
+              </li>
+            </ul>
+          </div>
+          <!-- 検索窓をメニューの下に配置 -->
+          <div class="d-flex justify-content-end mt-2">
+            <div class="search-container">
+              <%= form_with url: search_path, method: :get, local: true do |form| %>
+                <div class="input-group">
+                  <%= form.text_field :q, placeholder: "Search" %>
+                  <div class="input-group-append">
+                    <%= form.submit "検索", class: "btn btn-outline-secondary" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 </header>

@@ -1,19 +1,36 @@
-<h3>配送先編集</h3>
-
-<%= form_with model: @address, url: address_path(@address), method: :patch do |form| %>
-  <div>
-    <%= form.label :post_code, '郵便番号' %>
-    <%= form.text_field :post_code %>
+<div class="container">
+  <div class="row my-3">
+    <div class="col-2">
+      <h3 style="text-align:center; background-color: whitesmoke">配送先編集</h3>
+    </div>
   </div>
-  <div>
-    <%= form.label :address, '住所' %>
-    <%= form.text_field :address %>
+    <%= form_with model: @address, url: address_path(@address), method: :patch do |form| %>
+  <div class="row my-2">
+    <div class="col-3">
+      <%= form.label :post_code, '郵便番号(ハイフンなし)' %>
+    </div>
+    <div class="col-3">
+      <%= form.text_field :post_code, class: 'form-control' %>
+    </div>
   </div>
-  <div>
-    <%= form.label :name, '宛名' %>
-    <%= form.text_field :name %>
+  <div class="row my-2">
+    <div class="col-3">
+      <%= form.label :address, '住所' %>
+    </div>
+    <div class="col-5">
+      <%= form.text_field :address, class: 'form-control' %>
+    </div>
   </div>
-  <div>
-    <%= form.submit '変更内容保存', class:"btn btn-success" %>
+  <div class="row my-2">
+    <div class="col-3">
+      <%= form.label :name, '宛名' %>
+    </div>
+    <div class="col-3">
+      <%= form.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="col-4 d-flex justify-content-end">  <!--宛名の横に変更内容保存ボタン-->
+      <%= form.submit '変更内容保存', class:"btn btn-success" %>
+    </div>
   </div>
-<% end %>
+  <% end %>
+</div>

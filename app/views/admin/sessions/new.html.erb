@@ -21,38 +21,3 @@
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-1"></div>
-    <div class="col my-4">
-      <h4>管理者ログイン</h4>
-    </div>
-  </div>
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-2 mt-4">
-        <p>メールアドレス</p>
-      </div>
-      <div class="col mt-4">
-        <p><%= f.email_field :email, autofocus: true, autocomplete: "email", size: 50 %></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-2 mt-3">
-        <p>パスワード</p>
-      </div>
-      <div class="col mt-3">
-        <p><%= f.password_field :password, autocomplete: "current-password", size: 50 %></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-4"></div>
-      <div class="col mt-3">
-        <p><%= f.submit "ログイン", class:"btn btn-primary" %></p>
-      </div>
-    </div>
-  <% end %>
-  <%= render "admin/shared/links" %>
-</div>

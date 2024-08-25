@@ -3,10 +3,15 @@ class Admin::OrderDetailsController < ApplicationController
     @order_detail = OrderDetail.find(params[:id])
     @order_id = @order_detail.order_id
     @order = Order.find(@order_id)
-    @order_details = @order.order_details
+    
+    order = @order_detail.order
 
     if @order_detail.making_status == "making"
       @order.update(status:"making")
+    end
+    
+    if all_order_details_making_finished(order)
+      order.update(status: "preparation")
     end
 
     if @order_detail.update(order_detail_making_status_params)
@@ -17,8 +22,18 @@ class Admin::OrderDetailsController < ApplicationController
   end
 
   private
+  
   def order_detail_making_status_params
     params.require(:order_detail).permit(:making_status)
+  end
+  
+  def all_order_details_making_finished(order)
+    order.order_details.each do |order_detail|
+      if order_detail.making_status != "finish"
+        return false
+      end
+    end
+    return true
   end
 
 

@@ -17,7 +17,7 @@
       </div>
       <div class="row">
         <div class="col-2"><%= f.label :ジャンル %></div>
-        <div class="col-5"><%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "--選択してください--" %></div>
+        <div class="col-5"><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択してください--" %></div>
       </div>
       <div class="row">
         <div class="col-2"><%= f.label :税抜価格 %></div>

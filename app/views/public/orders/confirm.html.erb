@@ -23,6 +23,7 @@
               <td><%= cart_item.amount %></td>
               <td><%= cart_item.subtotal %></td>
             </tr>
+            <!-- カートアイテムをorder_detailへ -->
           <% end %>
         </tbody>
       </table>
@@ -67,6 +68,12 @@
         <%= f.hidden_field :total_payment, :value => @order.total_payment %>
         <%= f.hidden_field :payment_method, :value => @order.payment_method %>
         <%= f.submit "注文を確定する" %>
+        <!-- order_detailのやつ -->
+        <% @cart_items.each do |cart_item| %>
+          <%= f.hidden_field "cart_items[#{cart_item.id}][o_d_item_id]", :value => cart_item.item.id %>
+          <%= f.hidden_field "cart_items[#{cart_item.id}][o_d_price]", :value => cart_item.item.with_tax_price %>
+          <%= f.hidden_field  "cart_items[#{cart_item.id}][o_d_amount]", :value => cart_item.amount %>
+        <% end %>
       <% end %>
     </div>
   </div>

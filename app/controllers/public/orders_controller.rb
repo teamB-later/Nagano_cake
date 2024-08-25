@@ -23,8 +23,11 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.save
+    o_d_tes_meth
+    # cart_itemsの
     redirect_to thanks_path
   end
+
 
   def index
     @orders = current_customer.orders
@@ -35,6 +38,24 @@ class Public::OrdersController < ApplicationController
   end
 
   # メソッドの記述
+  def o_d_tes_meth
+    cart_items_params = order_detail_params_test
+    cart_items_params.each do |a, b|
+      @order_detail = OrderDetail.new
+      @order_detail.order_id = @order.id
+      b.each do |c, d|
+        if c == "o_d_item_id"
+          @order_detail.item_id = d
+        elsif c == "o_d_price"
+          @order_detail.price = d
+        else #o_d_amount
+          @order_detail.amount = d
+        end
+      end
+      @order_detail.save
+    end
+  end
+
   def input_address_method #ラジオボタンで選んだ住所関連の入力
     select_address = select_address_params.to_i
     if select_address == 0 #current_customerの住所
@@ -69,6 +90,14 @@ class Public::OrdersController < ApplicationController
 
   def address_params
     params[:order][:address_id]
+  end
+
+  def order_detail_params_test
+    params[:order][:cart_items]
+  end
+
+  def order_detail_params
+    params.require(:order_detail).permit(:order_id, :item_id, :price, :amount)
   end
 
 end

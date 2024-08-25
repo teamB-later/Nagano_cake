@@ -24,7 +24,7 @@ class Public::OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.save
     o_d_tes_meth
-    # cart_itemsの
+    current_customer.cart_items.destroy_all
     redirect_to thanks_path
   end
 

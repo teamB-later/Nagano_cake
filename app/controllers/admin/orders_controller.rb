@@ -10,24 +10,19 @@ class Admin::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_details = @order.order_details
 
-    if order_confirmation == true
-      @order_details.each do |order_detail|
-        order_detail.update(making_status: "waiting")
-      end
-    end
 
     if @order.update(order_params)
+      if order_confirmation == true
+        @order_details.each do |order_detail|
+          order_detail.update(making_status: "waiting")
+        end
+      end
       redirect_to admin_order_path(@order)
     else
       render :show
     end
 
-  end
 
-  private
-
-  def order_params
-    params.require(:order).permit(:status)
   end
 
   def order_confirmation
@@ -37,5 +32,12 @@ class Admin::OrdersController < ApplicationController
         return true
       end
   end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:status)
+  end
+
 
 end

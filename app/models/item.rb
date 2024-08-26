@@ -1,4 +1,9 @@
 class Item < ApplicationRecord
+  
+  validates :name,presence: true, length: {in: 1..50}
+  validates :introduction,presence: true, length: {in: 1..500}
+  validates :price, numericality: { only_integer: true }
+  
   belongs_to :genre
   # customers
   has_many :cart_items, dependent: :destroy

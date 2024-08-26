@@ -13,7 +13,7 @@ ja:
     order_detail:
       making_statuses:
         impossible: "製作不可"
-        wating: "製作待ち"
+        waiting: "製作待ち"
         making: "製作中"
         finish: "製作完了"
   activerecord:

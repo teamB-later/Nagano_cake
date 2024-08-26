@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'searches/index'
+  end
+  namespace :admin do
+    get 'searches/index'
+  end
   root to: 'public/homes#top'
   get 'about' => 'public/homes#about'
 
   scope module: :public do
+    # public/search/index
+    get 'search', to: 'searches#index'
     # public/items
     resources :items, only: [:index, :show]
     resource :customers, path: 'customers/my_page', only: [:show]
@@ -13,9 +21,9 @@ Rails.application.routes.draw do
     delete 'cart_items/destroy_all', as: 'destroy_all'
     resources :cart_items, only: [:index, :update, :destroy, :create]
     # public/orders
+    get 'orders/thanks', as: 'thanks'
     resources :orders, only: [:new, :create, :index, :show]
     post 'orders/confirm', as: 'confirm'
-    get 'orders/thanks', as: 'thanks'
     # public/addresses
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
@@ -23,6 +31,8 @@ Rails.application.routes.draw do
   namespace :admin do
     # admin/homes
     get '' => 'homes#top'
+    # admin/search/index
+    get 'search', to: 'searches#index'
     # admin/items
     resources :items, except: [:destroy]
     # admin/genres

@@ -5,20 +5,23 @@ class Admin::OrderDetailsController < ApplicationController
     @order = Order.find(@order_id)
     
     order = @order_detail.order
-
-    if @order_detail.making_status == "making"
-      @order.update(status:"making")
-    end
     
-    if all_order_details_making_finished(order)
-      order.update(status: "preparation")
-    end
-
     if @order_detail.update(order_detail_making_status_params)
+      if @order_detail.making_status == "making"
+        @order.update(status:"making")
+      end
+      if all_order_details_making_finished(order)
+        order.update(status: "preparation")
+      end
       redirect_to admin_order_path(@order)
     else
       render :show
     end
+
+    
+    
+    
+
   end
 
   private

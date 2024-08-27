@@ -1,42 +1,42 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg" style="background-color: #333; padding: 15px 20px;">
     <div class="container">
       <div class="row">
         <!-- ロゴを左に配置 -->
         <div class="col-3 d-flex align-items-center">
-          <a class="navbar-brand" href="/">
+          <a class="navbar-brand" href="/" style="font-size: 24px; font-weight: bold; color: #fff;">
             <span>Nagano Cake</span>
           </a>
         </div>
         <!-- 真ん中にメッセージ -->
         <div class="col-3 d-flex justify-content-center align-items-center">
-          <p>ようこそ、<%= current_customer.last_name %>さん!</p>
+          <p class="text-white">ようこそ、<%= current_customer.last_name %>さん!</p>
         </div>
         <!-- 右側にメニューを配置 -->
         <div class="col-6 d-flex justify-content-end align-items-center">
           <ul class="navbar-nav d-flex flex-row">
             <li class="nav-item">
-              <%= link_to "マイページ", customers_path, class: "btn btn-light", type: "button" %>
+              <%= link_to "マイページ", customers_path, class: "btn btn-light", type: "button", style: "background-color: #a9a9a9; color: black; border-radius: 5px; padding: 10px 20px; text-decoration: none;" %>
             </li>
             <li class="nav-item">
-              <%= link_to "商品一覧", items_path, class: "btn btn-light", type: "button" %>
+              <%= link_to "商品一覧", items_path, class: "btn btn-light", type: "button", style: "background-color: #a9a9a9; color: black; border-radius: 5px; padding: 10px 20px; text-decoration: none;" %>
             </li>
             <li class="nav-item">
-              <%= link_to "カート", cart_items_path, class: "btn btn-light", type: "button" %>
+              <%= link_to "カート", cart_items_path, class: "btn btn-light", type: "button", style: "background-color: #a9a9a9; color: black; border-radius: 5px; padding: 10px 20px; text-decoration: none;"%>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-light", type: "button" %>
+              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-light", type: "button", style: "background-color: #a9a9a9; color: black; border-radius: 5px; padding: 10px 20px; text-decoration: none;" %>
             </li>
           </ul>
         </div>
         <!-- 検索窓をメニューの下に配置 -->
         <div class="col-12 d-flex justify-content-end mt-2">
-          <div class="search-container">
+          <div class="search-container"  style="background-color: #444; padding: 10px; border-radius: 5px;">
             <%= form_with url: search_path, method: :get, local: true do |form| %>
-              <div class="input-group">
-                <%= form.text_field :q, class: "form-control", placeholder: "Search" %>
+              <div class="input-group" style="max-width: 300px;">
+                <%= form.text_field :q, class: "form-control", placeholder: "Search",  style: "border-radius: 5px 0 0 5px; border-color: #007bff; background-color: white; color: white;"%>
                 <div class="input-group-append">
-                  <%= form.submit "検索", class: "btn btn-outline-secondary" %>
+                  <%= form.submit "検索", class: "btn btn-outline-secondary", style: "background-color: white; color: black; border-radius: 0 5px 5px 0; border-color: #007bff;"  %>
                 </div>
               </div>
             <% end %>

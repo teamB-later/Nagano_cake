@@ -1,4 +1,16 @@
 <div class="container">
+  <% if @genre.errors.any? %>
+    <div class="row">
+      <div class="col">
+        <%= @genre.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
   <div class="row py-4">
     <div class="col-3">
       <h4 style="text-align:center; background-color: whitesmoke">ジャンル編集</h4>

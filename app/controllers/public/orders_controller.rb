@@ -1,4 +1,7 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+  before_action :cart_items_present, except: [:index, :show, :thanks]
+
   def new
     @order = Order.new
     @addresses = current_customer.addresses
@@ -6,6 +9,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
+    not_selected_or_not_entered #入力内容の不備を確認するメソッド
     customer_curt_items = current_customer.cart_items
     @cart_items = customer_curt_items.all
 
@@ -37,7 +41,34 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+
+  private
+
+  def order_params
+    params.require(:order).permit(:post_code, :address, :name, :shipping_cost, :total_payment, :payment_method)
+  end
+
+  def select_address_params
+    params[:order][:select_address]
+  end
+
+  def address_params
+    params[:order][:address_id]
+  end
+
+  def order_detail_params_test
+    params[:order][:cart_items]
+  end
+
+  def order_detail_params
+    params.require(:order_detail).permit(:order_id, :item_id, :price, :amount)
+  end
+
   # メソッドの記述
+  def cart_items_present
+    redirect_to items_path unless current_customer.cart_items.present?
+  end
+
   def o_d_tes_meth
     cart_items_params = order_detail_params_test
     cart_items_params.each do |a, b|
@@ -53,6 +84,46 @@ class Public::OrdersController < ApplicationController
         end
       end
       @order_detail.save
+    end
+  end
+
+  def not_selected_or_not_entered #入力情報の不備を確認
+    #payment_methodとselect_address両方ともnil
+    if @order.payment_method.nil? && select_address_params.nil?
+      redirect_to new_order_path, alert: "支払い方法とお届け先を選択して下さい" and return
+    #支払方法が未選択だった場合の処理
+    elsif @order.payment_method.nil?
+      redirect_to new_order_path, alert: "支払い方法を選択してください" and return
+    #お届け先が未選択だった時の処理
+    elsif select_address_params.nil?
+      redirect_to new_order_path, alert: "お届け先を選択してください" and return
+    #新しい住所を選んだときに未入力があった時の処理
+    elsif (select_address_params == "2") && ((@order.post_code == "") || (@order.address == "") || (@order.name == ""))
+      not_entered_address_alert #未入力時のメソッド
+    end
+  end
+
+  def not_entered_address_alert #新しいお届け先が未入力だった時の処理
+    if @order.post_code == ""
+      if @order.address == ""
+        if @order.name == ""
+          redirect_to new_order_path, alert: "郵便番号と住所と宛名を入力してください" and return
+        end
+        redirect_to new_order_path, alert: "郵便番号と住所を入力してください" and return
+      end
+      if @order.name == ""
+        redirect_to new_order_path, alert: "郵便番号と宛名を入力してください" and return
+      end
+      redirect_to new_order_path, alert: "郵便番号を入力してください" and return
+    end
+    if @order.address == ""
+      if @order.name == ""
+        redirect_to new_order_path, alert: "住所と宛名を入力してください" and return
+      end
+      redirect_to new_order_path, alert: "住所を入力してください" and return
+    end
+    if @order.name == ""
+      redirect_to new_order_path, alert: "宛名を入力してください" and return
     end
   end
 
@@ -76,28 +147,6 @@ class Public::OrdersController < ApplicationController
     @cart_items.each do |cart_item|
       @items_total_payment += cart_item.subtotal
     end
-  end
-
-  private
-
-  def order_params
-    params.require(:order).permit(:post_code, :address, :name, :shipping_cost, :total_payment, :payment_method)
-  end
-
-  def select_address_params
-    params[:order][:select_address]
-  end
-
-  def address_params
-    params[:order][:address_id]
-  end
-
-  def order_detail_params_test
-    params[:order][:cart_items]
-  end
-
-  def order_detail_params
-    params.require(:order_detail).permit(:order_id, :item_id, :price, :amount)
   end
 
 end

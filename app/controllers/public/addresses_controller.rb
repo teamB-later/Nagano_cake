@@ -1,5 +1,6 @@
 class Public::AddressesController < ApplicationController
-  before_action :authenticate_customer!, only: [:index, :edit, :update]
+  before_action :authenticate_customer!
+  
   def index
     @address = Address.new
     @addresses = current_customer.addresses.all
@@ -44,12 +45,4 @@ class Public::AddressesController < ApplicationController
   def address_params
     params.require(:address).permit(:post_code, :address, :name)
   end
-
-  def authenticate_customer!
-    unless customer_signed_in?
-      flash[:alert] = "ログインしてください。"
-      redirect_to root_path
-    end
-  end
-
 end

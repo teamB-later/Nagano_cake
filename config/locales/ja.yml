@@ -21,6 +21,7 @@ ja:
       customer:
         email: メールアドレス
         password: パスワード
+        password_confirmation: パスワード(確認用)
         last_name: 姓
         first_name: 名
         last_name_kana: 姓(カナ)

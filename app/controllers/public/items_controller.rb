@@ -1,5 +1,4 @@
 class Public::ItemsController < ApplicationController
-  before_action :authenticate_customer!
   def index
     @items = Item.page(params[:page]).per(8)
     @item_count = Item.count

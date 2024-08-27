@@ -5,6 +5,14 @@
         <h4>会員情報編集</h4>
       </div>
     </div>
+      <% if @customer.errors.any? %>
+        <%= @customer.errors.count %>件のエラーが発生しました
+        <ul>
+          <% @customer.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
     <div class="row mt-4 mb-2">
       <div class="col">
         <p>氏名</p>
@@ -16,7 +24,7 @@
         <%= f.text_field :last_name, value: @customer.last_name %>
       </div>
     </div>
-    
+
     <div class="row my-2">
       <div class="col">
         <p>フリガナ</p>
@@ -28,7 +36,7 @@
         <%= f.text_field :last_name_kana, value: @customer.last_name_kana %>
       </div>
     </div>
-    
+
     <div class="row my-2">
       <div class="col-4">
         <p>郵便番号</p>
@@ -37,7 +45,7 @@
         <%= f.text_field :post_code, value: @customer.post_code %>
       </div>
     </div>
-    
+
     <div class="row my-2">
       <div class="col-4">
         <p>住所</p>
@@ -46,7 +54,7 @@
         <%= f.text_field :address, value: @customer.address, size: 80 %>
       </div>
     </div>
-    
+
     <div class="row my-2">
       <div class="col-4">
         <p>電話番号</p>
@@ -55,7 +63,7 @@
         <%= f.text_field :telephone_number, value: @customer.telephone_number %>
       </div>
     </div>
-    
+
     <div class="row my-2">
       <div class="col-4">
         <p>メールアドレス</p>
@@ -64,7 +72,7 @@
         <%= f.text_field :email, value: @customer.email %>
       </div>
     </div>
-    
+
     <div class="row my-2">
       <div class="col-4">
         <p></p>
@@ -76,8 +84,8 @@
         <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger" %>
       </div>
     </div>
-    
-    
-    
+
+
+
   <% end %>
 </div>

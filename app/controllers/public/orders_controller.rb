@@ -9,7 +9,7 @@ class Public::OrdersController < ApplicationController
 
   def confirm
     @order = Order.new(order_params)
-    not_selected_or_not_entered #入力内容の不備を確認するメソッド
+    not_selected_or_not_entered_method #入力内容の不備を確認するメソッド
     customer_curt_items = current_customer.cart_items
     @cart_items = customer_curt_items.all
 
@@ -27,7 +27,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.save
-    o_d_tes_meth
+    order_details_method
     current_customer.cart_items.destroy_all
     redirect_to thanks_path
   end
@@ -65,16 +65,16 @@ class Public::OrdersController < ApplicationController
   end
 
   # メソッドの記述
-  def cart_items_present
+  def cart_items_present #カートアイテムが存在しないか確認するメソッド
     redirect_to items_path unless current_customer.cart_items.present?
   end
 
-  def o_d_tes_meth
+  def order_details_method #order_detailsを1つずつ登録するメソッド
     cart_items_params = order_detail_params_test
-    cart_items_params.each do |a, b|
+    cart_items_params.each do |a, b| #cart_itemsを1つずつ処理するためのeach
       @order_detail = OrderDetail.new
       @order_detail.order_id = @order.id
-      b.each do |c, d|
+      b.each do |c, d| #cart_itemが持つカラムそれぞれにデータを入れるためのeach
         if c == "o_d_item_id"
           @order_detail.item_id = d
         elsif c == "o_d_price"
@@ -87,7 +87,7 @@ class Public::OrdersController < ApplicationController
     end
   end
 
-  def not_selected_or_not_entered #入力情報の不備を確認
+  def not_selected_or_not_entered_method #入力情報の不備を確認
     #payment_methodとselect_address両方ともnil
     if @order.payment_method.nil? && select_address_params.nil?
       redirect_to new_order_path, alert: "支払い方法とお届け先を選択して下さい" and return
@@ -99,11 +99,11 @@ class Public::OrdersController < ApplicationController
       redirect_to new_order_path, alert: "お届け先を選択してください" and return
     #新しい住所を選んだときに未入力があった時の処理
     elsif (select_address_params == "2") && ((@order.post_code == "") || (@order.address == "") || (@order.name == ""))
-      not_entered_address_alert #未入力時のメソッド
+      not_entered_address_alert_method #未入力時のメソッド
     end
   end
 
-  def not_entered_address_alert #新しいお届け先が未入力だった時の処理
+  def not_entered_address_alert_method #新しいお届け先が未入力だった時の処理
     if @order.post_code == ""
       if @order.address == ""
         if @order.name == ""

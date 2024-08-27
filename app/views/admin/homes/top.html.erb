@@ -6,7 +6,18 @@
         <span class="bg-secondary text-white">注文履歴一覧</span>
       </h4>
     </div>
+    
   </div>
+  <div class="row pt-4 pb-0 mb-0">
+    <div class="col-4 pb-0 mb-0 d-flex justify-content-center">
+      <% if flash[:notice].present? %>
+        <div class="alert alert-success" style="border-radius: 10px;">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+      
   <div class="row">
     <div class="col-2"></div>
     <div class="col">

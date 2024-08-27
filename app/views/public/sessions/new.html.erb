@@ -1,6 +1,14 @@
 <div class="container">
   <div class="row-4 my-4">
     <h2>ログイン</h2>
+    <div class="col-4">
+      <% if flash[:alert].present? %>
+        <div class="alert alert-danger" style="border-radius: 10px;">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+    </div>
+    
   </div>
   <div class="row-4 my-4">
     <h5 class="mt-5">会員の方はこちらからログイン</h5>

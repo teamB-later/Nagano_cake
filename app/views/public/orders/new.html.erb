@@ -1,4 +1,13 @@
 <div class="container">
+  <div class="row pt-4 pb-0 mb-0">
+    <div class="col-4 pb-0 mb-0 d-flex justify-content-center">
+      <% if flash[:notice] %>
+        <span class="alert alert-success"><%= notice %></span>
+      <% elsif flash[:alert] %>
+        <span class="alert alert-danger"><%= alert %></span>
+      <% end %>
+    </div>
+  </div>
   <div class="row py-4">
     <div class="col-2 offset-1">
       <h4 style="text-align:center; background-color: whitesmoke">注文情報入力</h4>
@@ -24,11 +33,13 @@
             <%= current_customer.last_name%><%= current_customer.first_name %>
           </div>
           <!-- 登録済住所から選択-->
-          <%= f.radio_button :select_address, "1" %>
-          <%= f.label :select_address_1, "登録済住所から選択" %><br>
-          <div style="margin-left: 2em;">
-            <%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display), include_blank: "--選択してください--" %>
-          </div>
+          <% if @address.present? %>
+            <%= f.radio_button :select_address, "1" %>
+            <%= f.label :select_address_1, "登録済住所から選択" %><br>
+            <div style="margin-left: 2em;">
+              <%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display)%>
+            </div>
+          <% end %>
           <!-- 新しいお届け先 -->
           <%= f.radio_button :select_address, "2" %>
           <%= f.label :select_address_2, "新しいお届け先" %><br>

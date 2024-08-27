@@ -1,11 +1,9 @@
 class Order < ApplicationRecord
-  
+
   validates :name, presence: true, length: {in: 1..30}
   validates :post_code, presence: true, numericality: { only_integer: true }, length: { is: 7 }
   validates :address, presence: true, length: {in: 1..100}
-  validates :payment_method, presence: true
-  validates :select_address, presence: true
-  
+
   belongs_to :customer
   # items
   has_many :order_details, dependent: :destroy

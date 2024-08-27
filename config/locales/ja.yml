@@ -17,6 +17,45 @@ ja:
         making: "製作中"
         finish: "製作完了"
   activerecord:
+    attributes:
+      customer:
+        email: メールアドレス
+        password: パスワード
+        last_name: 姓
+        first_name: 名
+        last_name_kana: 姓(カナ)
+        first_name_kana: 名(カナ)
+        post_code: 郵便番号
+        address: 住所
+        telephone_number: 電話番号
+        is_active: 会員ステータス
+      address:
+        name: 宛名
+        post_code: 郵便番号
+        address: 住所
+      admin:
+        email: メールアドレス
+        password: パスワード
+      item:
+        name: 商品名
+        introduction: 商品説明文
+        price: 税抜価格
+        is_active: 販売ステータス
+      genre:
+        name: ジャンル名
+      cart_item:
+        amount: 数量
+      order:
+        post_code: 配送先郵便番号
+        address: 配送先住所
+        name: 配送先氏名
+        shipping_cost: 送料
+        total_payment: 請求額合計
+        status: 注文ステータス
+      order_detail:
+        pirce: 販売価格
+        amount: 数量
+        making_status: 製作ステータス
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

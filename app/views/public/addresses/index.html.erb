@@ -4,6 +4,27 @@
       <h1 style="text-align:center; background-color: whitesmoke">配達新規登録/一覧</h1>
     </div>
   </div>
+
+  <div class="row pt-4 pb-0 mb-0">
+    <div class="col-4 pb-0 mb-0 d-flex justify-content-center">
+      <% if flash[:notice] %>
+        <span class="alert alert-success"><%= notice %></span>
+      <% elsif flash[:alert] %>
+        <span class="alert alert-danger"><%= alert %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @address.errors.any? %>
+  <%= @address.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @address.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+  <% end %>
+
+
     <%= form_with model: @address, local: true do |form| %>
     <div class="row my-2">
       <div class="col-3">

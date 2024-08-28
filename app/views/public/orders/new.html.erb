@@ -33,7 +33,7 @@
             <%= current_customer.last_name%><%= current_customer.first_name %>
           </div>
           <!-- 登録済住所から選択-->
-          <% if @address.present? %>
+          <% if @addresses.present? %>
             <%= f.radio_button :select_address, "1" %>
             <%= f.label :select_address_1, "登録済住所から選択" %><br>
             <div style="margin-left: 2em;">

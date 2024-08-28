@@ -19,9 +19,9 @@
           <% @cart_items.each do |cart_item| %>
             <tr>
               <td><%= image_tag cart_item.item.get_item_image(50, 50) %><%= cart_item.item.name %></td>
-              <td><%= cart_item.item.with_tax_price %></td>
+              <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
               <td><%= cart_item.amount %></td>
-              <td><%= cart_item.subtotal %></td>
+              <td><%= cart_item.subtotal.to_s(:delimited) %></td>
             </tr>
             <!-- カートアイテムをorder_detailへ -->
           <% end %>
@@ -33,15 +33,15 @@
         <tbody>
           <tr>
             <td style="text-align:center; background-color: whitesmoke">送料</td>
-            <td><%= @order.shipping_cost %></td>
+            <td><%= @order.shipping_cost.to_s(:delimited) %></td>
           </tr>
           <tr>
             <td style="text-align:center; background-color: whitesmoke">商品合計</td>
-            <td><%= @items_total_payment %></td>
+            <td><%= @items_total_payment.to_s(:delimited) %></td>
           </tr>
           <tr>
             <td style="text-align:center; background-color: whitesmoke">請求金額</td>
-            <td><%= @order.total_payment %></td>
+            <td><%= @order.total_payment.to_s(:delimited) %></td>
           </tr>
         </tbody>
       </table>

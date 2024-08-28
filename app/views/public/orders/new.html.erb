@@ -46,7 +46,7 @@
           <div style="margin-left: 2em;">
             <div class="row py-1">
               <div class="col-3">郵便番号(ハイフンなし)</div>
-              <div class="col-2"><%= f.text_field :post_code, placeholder: "0000000" %></div>
+              <div class="col-2"><%= f.text_field :post_code, pattern: "[0-9]{7}", placeholder: "0000000" %></div>
             </div>
             <div class="row py-1">
               <div class="col-3">住所</div>

@@ -75,6 +75,7 @@ class Public::OrdersController < ApplicationController
       @order_detail = OrderDetail.new
       @order_detail.order_id = @order.id
       b.each do |c, d| #cart_itemが持つカラムそれぞれにデータを入れるためのeach
+      binding byebug
         if c == "o_d_item_id"
           @order_detail.item_id = d
         elsif c == "o_d_price"

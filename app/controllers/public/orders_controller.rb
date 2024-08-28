@@ -26,10 +26,13 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    @order.save
-    order_details_method
-    current_customer.cart_items.destroy_all
-    redirect_to thanks_path
+    if @order.save
+      order_details_method
+      current_customer.cart_items.destroy_all
+      redirect_to thanks_path
+    else
+      reder :confirm
+    end
   end
 
 
